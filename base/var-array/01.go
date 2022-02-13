@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"unsafe"
+)
 
 // 变量
 // var name string
@@ -65,21 +68,59 @@ const (
 )
 
 func main() {
-	var s1 = "wjja"
-	fmt.Println(s1)
-	fmt.Println("hello world!")
+	// var s1 = "wjja"
+	// fmt.Println(s1)
+	// fmt.Println("hello world!")
 	// 同一作用域不能声明同名变量
-	{
-		s1 := 22 // 简短变量声明只能在函数内使用
-		fmt.Println(s1)
+	// {
+	// 	s1 := 22 // 简短变量声明只能在函数内使用
+	// 	fmt.Println(s1)
+	// }
+	// // _ 匿名变量
+	// fmt.Println(n1, n2, n3)
+	// fmt.Println(a1, a2, a3)
+	// fmt.Println(b1, b2, b3)
+	// fmt.Println(c1, c2, c3, c4)
+	// fmt.Println(d1, d2, d3, d4)
+	// fmt.Println(KB, MB, GB, TB)
+
+	// i1, i2, i3 := int16(161), 077, 0xab // 10进制,8进制,16进制形式赋值 给int类型变量
+	// // 通过占位符来实现进制转换
+	// fmt.Printf("%d-%o-%x\n", i1, i1, i1) // %b输出其二进制值
+	// fmt.Printf("%d-%o-%x\n", i2, i2, i2)
+	// fmt.Printf("%d-%o-%x\n", i3, i3, i3)
+	// // %T查看变量的类型, %v打印变量的值
+	// // %#v打印值的时候会加上其类型的描述符
+	// fmt.Printf("%T-%#v\n", i1, "i1")
+
+	var k byte = 'A'
+	var m rune = '啥'
+	fmt.Printf("%T--%T\n", k, m)                    // uint8--int32
+	fmt.Println(unsafe.Sizeof(k), unsafe.Sizeof(m)) // 1, 4
+
+	// raw string 原样输出, 转义失效
+	str := `
+		曾经沧海难为水
+			除却巫山不是云
+	`
+	fmt.Printf("%#v\n", str)
+	// +或fmt.Sprint操作字符串
+	// utf8编码的汉字一般占3字节
+	fmt.Println(len("我自11")) // 8
+	// strings.Join()
+	// strconv.Itoa()
+	// strings.Index()
+
+	str1 := "hello春雨"
+	for i := 0; i < len(str1); i++ {
+		fmt.Print(" ", str1[i])
 	}
-	// _ 匿名变量
-	fmt.Println(n1, n2, n3)
-	fmt.Println(a1, a2, a3)
-	fmt.Println(b1, b2, b3)
-	fmt.Println(c1, c2, c3, c4)
-	fmt.Println(d1, d2, d3, d4)
-	fmt.Println(KB, MB, GB, TB)
+	fmt.Println()
+	// 使用for range遍历字符串
+	for _, v := range str1 {
+		fmt.Printf("%c ", v)
+	}
+	fmt.Println()
 }
 
 // go build 	编译当前目录文件
